@@ -11,7 +11,7 @@ namespace Alice\Common;
  * Lightweight event framework
  *
  * @author Tim Gunter <tim@vanillaforums.com>
- * @package alice
+ * @package alice-common
  */
 class Event {
 

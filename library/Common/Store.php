@@ -13,7 +13,7 @@ namespace Alice\Common;
  * Allows data persist even through reloads.
  *
  * @author Tim Gunter <tim@vanillaforums.com>
- * @package alice
+ * @package alice-common
  */
 class Store {
 

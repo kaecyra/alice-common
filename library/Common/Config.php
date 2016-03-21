@@ -14,7 +14,7 @@ namespace Alice\Common;
  * configuration files, both physical and virtual.
  *
  * @author Tim Gunter <tim@vanillaforums.com>
- * @package alice
+ * @package alice-common
  */
 class Config extends Fire {
 

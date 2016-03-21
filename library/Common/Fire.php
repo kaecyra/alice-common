@@ -11,7 +11,7 @@ namespace Alice\Common;
  * Wire-up for event firing with senders
  *
  * @author Tim Gunter <tim@vanillaforums.com>
- * @package alice
+ * @package alice-common
  */
 class Fire {
 

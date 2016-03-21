@@ -5,7 +5,7 @@
  *
  * @copyright 2016 Tim Gunter
  * @license MIT
- * @package alice
+ * @package alice-common
  */
 
 /**
