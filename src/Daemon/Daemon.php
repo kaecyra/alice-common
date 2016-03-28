@@ -902,7 +902,12 @@ class Daemon {
 
             if ($options & Daemon::LOG_O_SHOWTIME) {
                 $time = Daemon::time('now');
-                $output .= "[" . $time->format('Y-m-d H:i:s') . "] ";
+                $output .= "[" . $time->format('Y-m-d H:i:s') . "]";
+            }
+
+            // Pad output if there are tags
+            if (strlen($output)) {
+                $output .= ' ';
             }
 
             $output .= $message;
