@@ -17,10 +17,10 @@
     },
     "autoload": {
         "psr-4": { 
-            "Alice\\": "library"
+            "Alice\\": "src"
         },
         "files": [
-            "library/map/functions.general.php"
+            "src/map/functions.general.php"
         ]
     }
 }
