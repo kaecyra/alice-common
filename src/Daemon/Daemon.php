@@ -753,7 +753,7 @@ class Daemon {
      * @param integer $signal
      */
     public function signal($signal) {
-        Daemon::log(Daemon::LOG_L_THREAD, " Caught signal '{$signal}'", Daemon::LOG_O_SHOWPID);
+        Daemon::log(Daemon::LOG_L_THREAD, "Caught signal '{$signal}'", Daemon::LOG_O_SHOWPID);
 
         switch ($signal) {
 
@@ -829,7 +829,7 @@ class Daemon {
             $workerType = val($pid, $this->children);
             unset($this->children[$pid]);
             $fleetSize = $this->fleetSize();
-            Daemon::log(Daemon::LOG_L_THREAD, " Landing fleet '{$workerType}' with PID {$pid} ({$fleetSize} still in the air)", Daemon::LOG_O_SHOWPID);
+            Daemon::log(Daemon::LOG_L_THREAD, "Landing fleet '{$workerType}' with PID {$pid} ({$fleetSize} still in the air)", Daemon::LOG_O_SHOWPID);
         }
     }
 
@@ -840,7 +840,7 @@ class Daemon {
     protected function genocide() {
         static $killing = false;
         if (!$killing) {
-            Daemon::log(Daemon::LOG_L_THREAD, " Shutting down fleet operations...", Daemon::LOG_O_SHOWPID);
+            Daemon::log(Daemon::LOG_L_THREAD, "Shutting down fleet operations...", Daemon::LOG_O_SHOWPID);
             $killing = true;
             foreach ($this->children as $childpid => $childtype) {
                 posix_kill($childpid, SIGKILL);
