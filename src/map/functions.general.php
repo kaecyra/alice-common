@@ -1,12 +1,26 @@
 <?php
 
 /**
+ * @license MIT
+ * @copyright 2016 Tim Gunter
+ */
+
+/**
  * General functions
  *
- * @copyright 2016 Tim Gunter
- * @license MIT
  * @package alice-common
  */
+
+/**
+ * Write to log
+ */
+function rec($message = '', $level = \Alice\Daemon\Daemon::LOG_L_APP, $options = null) {
+    if (is_array($message) || is_object($message)) {
+        $message = print_r($message, true);
+    }
+    \Alice\Daemon\Daemon::log($level, $message, $options);
+    return trim($message, ' !><-');
+}
 
 /**
  * Concatenate path elements into single string.
@@ -551,21 +565,16 @@ function locked($lockFile, $recover = true) {
 /**
  * Check if a pid is running
  *
- * @param string $pidFile
+ * @param string $pid
  * @return boolean
  */
-function running($pidFile) {
-    if (!file_exists($pidFile)) {
-        return false;
-    }
-
-    $runPid = trim(file_get_contents($pidFile));
-    if (!$runPid) {
+function running($pid) {
+    if (!$pid) {
         return false;
     }
 
     // Is the PID running?
-    $running = posix_kill($runPid, 0);
+    $running = posix_kill($pid, 0);
     if (!$running) {
         return false;
     }
@@ -592,14 +601,5 @@ function getPid($pidFile) {
         return false;
     }
 
-    // Is the PID running?
-    $running = posix_kill($runPid, 0);
-    if (!$running) {
-        return false;
-    }
-
-    // Did we have trouble pinging that PID?
-    $psExists = !(bool)posix_get_last_error();
-
-    return $psExists ? $runPid : false;
+    return $runPid;
 }

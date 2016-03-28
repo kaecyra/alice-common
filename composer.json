@@ -13,7 +13,8 @@
     ],
     "require": {
         "php": ">=5.5",
-        "vanilla/garden-http": "~1.0"
+        "vanilla/garden-http": "^1.1.1",
+        "vanilla/garden-cli": "~1.0"
     },
     "autoload": {
         "psr-4": { 

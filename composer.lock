@@ -4,9 +4,45 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d236c5dcf1a0edd24fe4989238dba47a",
-    "content-hash": "d3141002ee79ee5f147b80ee643bb11c",
+    "hash": "490a8548746761aecbac1cc4193e6439",
+    "content-hash": "19a8b07a8fb0e088346029f8cabed2cc",
     "packages": [
+        {
+            "name": "vanilla/garden-cli",
+            "version": "v1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vanilla/garden-cli.git",
+                "reference": "91487172b7b94435cf6960052479d24c2e97233d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vanilla/garden-cli/zipball/91487172b7b94435cf6960052479d24c2e97233d",
+                "reference": "91487172b7b94435cf6960052479d24c2e97233d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Garden\\Cli\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Todd Burry",
+                    "email": "todd@vanillaforums.com"
+                }
+            ],
+            "description": "A full-featured, yet ridiculously simple commandline parser for your next php cli script. Stop fighting with getopt().",
+            "time": "2016-01-28 20:35:34"
+        },
         {
             "name": "vanilla/garden-http",
             "version": "v1.1.1",
