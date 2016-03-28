@@ -259,7 +259,7 @@ class Event {
             return true;
         }
 
-        register_tick_function([self, 'tick']);
+        register_tick_function(['\Alice\Common\Event', 'tick']);
     }
 
     /**
@@ -268,7 +268,7 @@ class Event {
      */
     public static function disableTicks() {
         if (self::$ticking) {
-            unregister_tick_function([self, 'tick']);
+            unregister_tick_function(['\Alice\Common\Event', 'tick']);
         }
     }
 
