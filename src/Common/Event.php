@@ -259,7 +259,7 @@ class Event {
             return true;
         }
 
-        register_tick_function(['Event', 'tick']);
+        register_tick_function([self, 'tick']);
     }
 
     /**
@@ -268,7 +268,7 @@ class Event {
      */
     public static function disableTicks() {
         if (self::$ticking) {
-            unregister_tick_function(['Event', 'tick']);
+            unregister_tick_function([self, 'tick']);
         }
     }
 

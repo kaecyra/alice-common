@@ -324,9 +324,10 @@ class Daemon {
                     $realm = $daemon->fork('daemon', true, $pidFile);
                     $daemon->realm = $realm;
 
-                    // Console throws a 200 exception to terminate execution
+                    // Console returns 0
                     if ($realm == 'console') {
-                        throw new Exception("Parent exiting normally", 200);
+                        Daemon::log(Daemon::LOG_L_THREAD, " - parent exited normally");
+                        return 0;
                     }
 
                     Daemon::setoption('logtoscreen', false);
