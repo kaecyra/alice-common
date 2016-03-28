@@ -271,7 +271,8 @@ class Daemon {
 
                         // Check if it's still running
                         if (running($runPid)) {
-                            throw new Exception(" - unable to stop daemon", 500);
+                            Daemon::log(Daemon::LOG_L_FATAL, ' - unable to store daemon');
+                            return 1;
                         }
                     }
                 }
@@ -297,7 +298,9 @@ class Daemon {
                     if (running($runPid)) {
                         $watchdog = $args->getOpt('watchdog');
                         $code = $watchdog ? 200 : 500;
-                        throw new Exception(' - already running', $code);
+
+                        Daemon::log(Daemon::LOG_L_FATAL, " - already running");
+                        return 0;
                     }
                 }
 
@@ -311,7 +314,8 @@ class Daemon {
                 $sysGroup = Daemon::option('sysRunAsGroup', null);
                 if ($sysUser || $sysGroup) {
                     if ($user != 'root') {
-                        throw new Exception(' - must be running as root to setegid() or seteuid()');
+                        Daemon::log(Daemon::LOG_L_FATAL, ' - must be running as root to setegid() or seteuid()');
+                        return 1;
                     }
                 }
 
@@ -326,7 +330,7 @@ class Daemon {
 
                     // Console returns 0
                     if ($realm == 'console') {
-                        Daemon::log(Daemon::LOG_L_THREAD, " - parent exited normally");
+                        Daemon::log(Daemon::LOG_L_THREAD, " - parent exited normally", Daemon::LOG_O_SHOWPID);
                         return 0;
                     }
 
@@ -334,7 +338,7 @@ class Daemon {
 
                 } else {
 
-                    Daemon::log(Daemon::LOG_L_THREAD, "Will not go into background");
+                    Daemon::log(Daemon::LOG_L_THREAD, "Will not go into background", Daemon::LOG_O_SHOWPID);
                     $daemon->realm = 'daemon';
                 }
 
@@ -672,7 +676,7 @@ class Daemon {
 
             // Lock it up
             if ($lock) {
-                Daemon::log(Daemon::LOG_L_THREAD, "  - locking process");
+                Daemon::log(Daemon::LOG_L_THREAD, " - locking child process", Daemon::LOG_O_SHOWPID);
                 $pidFile = $lock;
                 $locked = lock($pidFile);
                 if (!$locked) {
