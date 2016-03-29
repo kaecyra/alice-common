@@ -14,7 +14,7 @@
 /**
  * Write to log
  */
-function rec($message = '', $level = \Alice\Daemon\Daemon::LOG_L_APP, $options = null) {
+function rec($message = '', $level = \Alice\Daemon\Daemon::LOG_L_APP, $options = \Alice\Daemon\Daemon::LOG_O_SHOWTIME) {
     if (is_array($message) || is_object($message)) {
         $message = print_r($message, true);
     }
