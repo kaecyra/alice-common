@@ -86,7 +86,7 @@ class Store {
         $key = trim($key);
         $path = explode('.', $key);
         $pathLength = count($path);
-        $target = &$this->config;
+        $target = &$this->data;
         for ($i = 1; $i <= $pathLength; ++$i) {
             $subKey = $path[$i - 1];
 
