@@ -102,4 +102,17 @@ class Store {
         unset($target[$subKey]);
     }
 
+    /**
+     * Push data onto key
+     *
+     * @param string $key
+     * @param array $data
+     */
+    public function push($key, $data) {
+        if (!array_key_exists($key, $this->data) || !is_array($this->data[$key])) {
+            $this->data[$key] = [];
+        }
+        array_push($this->data[$key], $data);
+    }
+
 }
