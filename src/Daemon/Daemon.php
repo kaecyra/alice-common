@@ -250,7 +250,7 @@ class Daemon {
             case 'install':
                 break;
 
-            // Stop or restart bot
+            // Stop or restart daemon
             case 'stop':
             case 'restart':
 
@@ -287,7 +287,7 @@ class Daemon {
                     Daemon::log(Daemon::LOG_L_THREAD, ' - restarting...');
                 }
 
-            // Start bot
+            // Start daemon
             case 'start':
 
                 // Check for currently running instance

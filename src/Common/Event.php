@@ -38,7 +38,7 @@ class Event {
      * Fire an event
      *
      * @param string $event
-     * @param array $arguments Optional.
+     * @param array $arguments optional.
      */
     public static function fire($event, $arguments = null) {
         $arguments = (array)$arguments;
