@@ -5,7 +5,7 @@
  * @copyright 2016 Tim Gunter
  */
 
-namespace Alice\Client;
+namespace Alice\Socket;
 
 /**
  * ALICE Socket Message wrapper
