@@ -77,6 +77,12 @@ abstract class SocketClient {
      */
     protected $tickFreq = 1;
 
+    /**
+     *
+     * @var React\EventLoop\LoopInterface
+     */
+    protected $loop;
+
     public function __construct() {
         $this->retry = 0;
     }
@@ -86,9 +92,11 @@ abstract class SocketClient {
      *
      */
     public function run($loop, $retry) {
+        $this->loop = $loop;
         $this->retry = $retry;
-        $loop->addPeriodicTimer($this->tickFreq, [$this, 'tick']);
-        $loop->run();
+
+        $this->loop->addPeriodicTimer($this->tickFreq, [$this, 'tick']);
+        $this->loop->run();
     }
 
     /**
@@ -133,7 +141,7 @@ abstract class SocketClient {
 
         $this->state = self::STATE_CONNECTING;
 
-        $connector = new \Ratchet\Client\Connector(Sensor::loop());
+        $connector = new \Ratchet\Client\Connector($this->loop);
         $connector($connectionDSN, [], [
             'Host' => $host
         ])->then([$this, 'connected'], [$this, 'connectFailed']);
