@@ -85,9 +85,10 @@ abstract class SocketClient {
      * Run client
      *
      */
-    public function run() {
-        Sensor::loop()->addPeriodicTimer($this->tickFreq, [$this, 'tick']);
-        Sensor::loop()->run();
+    public function run($loop, $retry) {
+        $this->retry = $retry;
+        $loop->addPeriodicTimer($this->tickFreq, [$this, 'tick']);
+        $loop->run();
     }
 
     /**
