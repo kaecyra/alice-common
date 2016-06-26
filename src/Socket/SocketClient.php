@@ -93,7 +93,6 @@ abstract class SocketClient {
      */
     public function run($loop, $retry) {
         $this->loop = $loop;
-        $this->retry = $retry;
 
         $this->loop->addPeriodicTimer($this->tickFreq, [$this, 'tick']);
         $this->loop->run();
