@@ -136,6 +136,15 @@ class Daemon {
     }
 
     /**
+     * Get CLI args
+     * 
+     * @return \Garden\Cli\Args
+     */
+    public static function getArgs() {
+        return Daemon::option('args');
+    }
+
+    /**
      * Execute Daemon
      *
      * @param array $arguments
