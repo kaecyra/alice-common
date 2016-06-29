@@ -137,7 +137,7 @@ class Daemon {
 
     /**
      * Get CLI args
-     * 
+     *
      * @return \Garden\Cli\Args
      */
     public static function getArgs() {
@@ -179,30 +179,7 @@ class Daemon {
         Daemon::$logFile = null;
 
         $appLogFile = Daemon::option('appLogFile', null);
-        if ($appLogFile !== false) {
-            if (substr($appLogFile, 0, 1) != '/') {
-                $appLogFile = paths($appDir, $appLogFile);
-            }
-
-            $appLogDir = dirname($appLogFile);
-            if (!is_dir($appLogDir) || !file_exists($appLogDir)) {
-                @mkdir($appLogDir, 0755, true);
-            }
-
-            if (file_exists($appLogFile)) {
-                // Copy to the side after 10mb
-                if (filesize($appLogFile) > (10 * 1024 * 1024)) {
-                    rename($appLogFile, "{$appLogFile}.1");
-                    file_put_contents($appLogFile, '');
-                }
-            } else {
-                touch($appLogFile);
-            }
-
-            if (is_writable($appLogFile)) {
-                Daemon::$logFile = fopen($appLogFile, 'a');
-            }
-        }
+        self::openLog($appLogFile);
 
         // Set up app
 
@@ -893,6 +870,46 @@ class Daemon {
         }
 
         return $date;
+    }
+
+    /**
+     * Open log file for writing
+     *
+     * Also closes currently open log file if needed.
+     *
+     * @param string $logFile
+     */
+    public static function openLog($logFile) {
+        if ($logFile !== false) {
+            Daemon::setoption('appLogFile', $logFile);
+
+            if (substr($logFile, 0, 1) != '/') {
+                $logFile = paths(Daemon::option('appDir'), $logFile);
+            }
+
+            $appLogDir = dirname($logFile);
+            if (!is_dir($appLogDir) || !file_exists($appLogDir)) {
+                @mkdir($appLogDir, 0755, true);
+            }
+
+            if (file_exists($logFile)) {
+                // Copy to the side after 10mb
+                if (filesize($logFile) > (10 * 1024 * 1024)) {
+                    rename($logFile, "{$logFile}.1");
+                    file_put_contents($logFile, '');
+                }
+            } else {
+                touch($logFile);
+            }
+
+            if (is_writable($logFile)) {
+                if (Daemon::$logFile) {
+                    fclose(Daemon::$logFile);
+                }
+
+                Daemon::$logFile = fopen($logFile, 'a');
+            }
+        }
     }
 
     /**
