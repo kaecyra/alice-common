@@ -235,7 +235,9 @@ class Daemon {
             $appClassName::commands($cli);
         }
 
+        // Parse CLI
         $args = $cli->parse($arguments, true);
+        Daemon::setoption('args', $args);
 
         $command = $args->getCommand();
         $sysDaemonize = Daemon::option('sysDaemonize', true);
