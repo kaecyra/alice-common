@@ -41,7 +41,7 @@ class Watson extends API {
         if (!$settings) {
             $settings = $config->get('api.watson', []);
         }
-        parent::__construct($settings);
+        parent::__construct($config, $settings);
     }
 
     /**
@@ -113,7 +113,7 @@ class Watson extends API {
         $request = $client->createRequest('GET', $url);
         $response = $request->send();
 
-        
+
     }
 
     /**
