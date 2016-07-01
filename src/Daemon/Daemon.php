@@ -756,6 +756,11 @@ class Daemon {
             case SIGINT:
             case SIGTERM:
                 if ($this->realm == 'daemon') {
+                    if ($this->instance) {
+                        if (is_callable([$this->instance, 'shutdown'])) {
+                            $this->instance->shutdown();
+                        }
+                    }
                     $this->genocide();
                     throw new Exception("Shutdown", 200);
                 }
